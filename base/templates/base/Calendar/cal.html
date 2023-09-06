@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date Selection with Pikaday</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Include Pikaday CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+  <!-- Include Pikaday JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>Select a Date</h2>
+  <div id="datepicker-container">
+    <div class="date-buttons"></div>
+  </div>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var dateButtons = document.querySelector(".date-buttons");
+
+    var picker = new Pikaday({
+      field: dateButtons,
+      format: "DD/MM/YYYY",
+      onSelect: function(date) {
+        alert("Selected date: " + date.toLocaleDateString());
+      }
+    });
+
+    var dates = ["00/00/0000"]; // Example dates
+    dates.forEach(function(date) {
+      var button = document.createElement("button");
+      button.className = "btn btn-outline-primary mr-2 mb-2";
+      button.textContent = new Date(date).toLocaleDateString();
+      button.addEventListener("click", function() {
+        picker.setDate(new Date(date));
+      });
+      dateButtons.appendChild(button);
+    });
+  });
+</script>
+
+</body>
+</html>
